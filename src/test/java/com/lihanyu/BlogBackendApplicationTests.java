@@ -1,5 +1,6 @@
 package com.lihanyu;
 
+import com.lihanyu.Utiliy.TokenCreate;
 import com.lihanyu.dao.UserDao;
 import com.lihanyu.domain.User;
 import com.lihanyu.service.UserService;
@@ -23,7 +24,12 @@ class BlogBackendApplicationTests {
 
     @Test
     public void userGetPage() {
-        System.out.println(userService.getUserPage());
+        System.out.println(userService.getUserPage(1, 2));
+    }
+
+    @Test
+    public void token() {
+        System.out.println(TokenCreate.tokenCreate("123456"));
     }
 
 

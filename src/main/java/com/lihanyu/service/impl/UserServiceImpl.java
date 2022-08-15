@@ -18,28 +18,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) {
-        try {
-            userDao.insert(user);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (userDao.getUserByUsername(user.getUsername()) != null) {
+            try {
+                userDao.insert(user);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
         }
-
+        return false;
     }
 
     @Override
-    public User login(String username, String password) {
-        return null;
+    public boolean login(String username, String password) {
+        return userDao.loginUser(username, password) != null;
     }
 
     @Override
     public User getUserById(Integer id) {
-        return null;
+        return userDao.selectById(id);
     }
 
     @Override
-    public List<User> getUserPage() {
+    public User getByUsername(String username) {
+        return userDao.getUserByUsername(username);
+    }
+
+    @Override
+    public List<User> getUserPage(int current, int size) {
         IPage<User> page = new Page<>(1, 2);
         userDao.selectPage(page, null);
         return page.getRecords();
