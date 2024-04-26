@@ -52,4 +52,9 @@ public class UserController {
         User user = userService.getUserById(id);
         return new Result(Code.SUCCESS, "查询成功", user);
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 }
